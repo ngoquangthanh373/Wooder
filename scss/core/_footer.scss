@@ -1,0 +1,32 @@
+.footer {
+	background-color: $black-color;
+	padding: 16px;
+	&-container {
+		color: $white-color;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: $gray-color;
+		font-size: 1.2rem;
+		letter-spacing: 0.05em;
+		font-family: $font-pr;
+		position: relative;
+	}
+	&-logo {
+		@include mid();
+		a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+	&-right {
+		cursor: pointer;
+	}
+	@include xs {
+		&-container {
+			flex-direction: column;
+			gap: 46px 0;
+		}
+	}
+}

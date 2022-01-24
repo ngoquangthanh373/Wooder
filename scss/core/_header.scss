@@ -1,0 +1,200 @@
+.header {
+	height: var(--height-header);
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 300;
+	background: transparent;
+	@include transition($t);
+
+	&.active {
+		background-color: $black-cl;
+		@include transition($t);
+	}
+	&-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 100%;
+		position: relative;
+	}
+	&-logo {
+		height: 100%;
+		a {
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+	.menu {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 100%;
+		gap: 0 70px;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		&-item {
+			height: 100%;
+		}
+		&-link {
+			font-size: 1.5rem;
+			text-transform: uppercase;
+			color: $white-color;
+			@include transition($t);
+			height: 100%;
+			display: flex;
+			align-items: center;
+			position: relative;
+			&:before {
+				content: '';
+				position: absolute;
+				top: 70%;
+				left: 0;
+				width: 100%;
+				height: 2px;
+				background-color: $primary-color;
+				@include transition(transform $t);
+				@include transform(scaleX(0));
+				@include transform-origin(center right);
+				will-change: transform;
+			}
+			&.active {
+				color: $primary-color;
+				&:before {
+					@include transition(transform $t);
+					@include transform(scaleX(1));
+					@include transform-origin(left);
+				}
+			}
+			&:hover {
+				color: $primary-color;
+				&:before {
+					@include transform(scaleX(1));
+					@include transform-origin(center left);
+				}
+			}
+		}
+	}
+	&-right {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&-lang {
+		height: 100%;
+		position: relative;
+		&:hover .header-sublang {
+			display: block;
+		}
+	}
+	&-current {
+		display: flex;
+		align-items: center;
+		color: $white-color;
+		font-size: 1.6rem;
+		gap: 0 6px;
+		cursor: pointer;
+		height: 100%;
+		letter-spacing: 0.05em;
+		@include transition($t);
+		&:hover {
+			color: $primary-color;
+		}
+		i {
+			img {
+				@include transform(translateY(-50%));
+			}
+		}
+	}
+	&-sublang {
+		display: none;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		background-color: $black-color;
+		cursor: pointer;
+		& a {
+			display: block;
+			font-size: 1.6rem;
+			color: $white-color;
+			padding: 14px 14px 14px 34px;
+			border-bottom: 1px solid $gray-color-dark;
+			transition: all 0.2s linear;
+			&:last-child {
+				border: none;
+			}
+			&:hover {
+				color: $primary-color;
+			}
+		}
+	}
+	@include md {
+		.menu {
+			gap: 0 30px;
+		}
+	}
+	@include sm {
+		.menu {
+			gap: 0 20px;
+			left: 60%;
+			transform: translateX(-60%);
+		}
+	}
+	@include xs {
+		.menu {
+			display: none;
+		}
+		&-right {
+			gap: 0 15px;
+		}
+		&-hamburger {
+			width: 24px;
+			height: 20px;
+			position: relative;
+			&.active {
+				span {
+					opacity: 0;
+					@include transform(translateX(100%));
+					@include transition($t);
+				}
+				&:before {
+					@include transform(rotate(45deg) translate(10px, 3px));
+					@include transition($t);
+				}
+				&:after {
+					@include transform(rotate(-45deg) translate(10px, -3px));
+					@include transition($t);
+				}
+			}
+			span {
+				width: 100%;
+				height: 2px;
+				background-color: $primary-color;
+				display: block;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			&:before,
+			&:after {
+				content: ' ';
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				background-color: $primary-color;
+				left: 0;
+			}
+			&:before {
+				top: 0;
+			}
+			&:after {
+				bottom: 0;
+			}
+		}
+	}
+}

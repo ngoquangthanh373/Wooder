@@ -1,0 +1,34 @@
+.navbar {
+	display: none;
+	@include xs {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: fixed;
+		top: 0;
+		width: 100vw;
+		height: 0;
+		background-color: #161616;
+		z-index: 200;
+		opacity: 0;
+		pointer-events: none;
+		@include transition($t);
+		&.active {
+			height: 100vh;
+			opacity: 1;
+			pointer-events: auto;
+			@include transition($t linear);
+		}
+		a {
+			padding: 20px 20px;
+			color: $white-cl;
+			text-align: center;
+			text-transform: uppercase;
+			letter-spacing: 0.025em;
+			@include transition($t);
+			&.active {
+				color: $primary-color;
+			}
+		}
+	}
+}
